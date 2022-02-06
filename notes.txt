@@ -1,0 +1,126 @@
+import React,{useEffect} from 'react';
+// import { Card } from "react-bootstrap";
+// import { getAllProjectDetails } from '../../actions/projectAllaction';
+// import { useSelector,useDispatch } from 'react-redux';
+// const projectDetails = ({match}) => {
+//     const dispatch = useDispatch();
+//     const {projectDetail,loading}=useSelector(
+//         (state)=>state.projectDetail
+//         );
+
+//     useEffect(() => {
+//      dispatch(getAllProjectDetails(match.params.id))
+//     }, [dispatch,match.params.id]);
+    
+//   return (
+//       <>
+//       <div className='ProjectDetails'>
+//           <div>
+//           {/* <Card.Img
+//               variant="top"
+//               src={projectDetail.description[0].url}
+//               alt={projectDetail.title}
+//               style={{height:"150px"}}
+//             /> */}
+//           </div>
+//       </div>
+//       </>
+
+//   );
+// };
+
+// export default projectDetails;
+
+
+
+{projectDetail.description &&
+                 projectDetail.description.map((item)=>(
+
+            <Card.Img
+              variant="top"
+              src={item.description[0].url}
+              alt={item.title}
+              style={{height:"150px"}}
+            />
+                 )
+ 6:40           
+
+
+
+
+ const mongoose = require("mongoose");
+const projectDetailsSchema = mongoose.Schema({
+    title:{
+        type:String,
+        required:[true,"pls enter title"]
+    },
+    description:[
+        {
+            url:{
+                type:String,
+                required:false,
+            },
+            text:{
+                type:String,
+                required:false,
+
+            }
+        },
+    ],
+    demo_URL:{
+        type:String,
+        required:[true,"pls enter demo"]
+    },
+    github_URL:{
+        type:String,
+        required:[true,"pls enter github"]
+    },
+    //multiple question
+    questionss:[
+        
+        {
+            questions:{
+                
+                    type:String,
+                    required:false
+                
+            },
+            ans: {
+                type: String,
+                required: false,
+              },
+        }
+    ],
+    //one question=>1 ans
+    anwers:[
+        {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User",
+                required: false,
+              },
+              name: {
+                type: String,
+                required: false,
+              },
+              question: {
+                type: Number,
+                required: false,
+              },
+              ans: {
+                type: String,
+                required: false,
+              },
+        }
+    ],
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: false,
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now
+    }
+})
+module.exports = mongoose.model("ProjectDetails",projectDetailsSchema)
